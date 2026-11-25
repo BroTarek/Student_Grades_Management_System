@@ -16,6 +16,9 @@
     <Compile Include="Views/ExamsTableView.fs" />
     <Compile Include="Views/StudentsTableView.fs" />
     <Compile Include="Views/StudentModals.fs" />
+    <Compile Include="Views/MockSubmissionModal.fs" />
+    <Compile Include="Views/HomeView.fs" />
+    <Compile Include="Tests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
