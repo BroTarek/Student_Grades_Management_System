@@ -15,6 +15,7 @@
     <Compile Include="Views/ProfilePanel.fs" />
     <Compile Include="Views/ExamsTableView.fs" />
     <Compile Include="Views/StudentsTableView.fs" />
+    <Compile Include="Views/StudentModals.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
