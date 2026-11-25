@@ -7,19 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Models.fs" />
-    <Compile Include="State.fs" />
-    <Compile Include="Views/Theme.fs" />
-    <Compile Include="Views/RegistrationView.fs" />
-    <Compile Include="Views/LoginView.fs" />
-    <Compile Include="Views/ProfilePanel.fs" />
-    <Compile Include="Views/ExamsTableView.fs" />
-    <Compile Include="Views/StudentsTableView.fs" />
-    <Compile Include="Views/StudentModals.fs" />
-    <Compile Include="Views/MockSubmissionModal.fs" />
-    <Compile Include="Views/HomeView.fs" />
-    <Compile Include="Tests.fs" />
-    <Compile Include="Program.fs" />
+    <Compile Include="Branch1_DomainModels/Models.fs" />
+    <Compile Include="Branch2_AppState/State.fs" />
+    <Compile Include="Branch3_RegistrationView/Theme.fs" />
+    <Compile Include="Branch3_RegistrationView/RegistrationView.fs" />
+    <Compile Include="Branch4_LoginView/LoginView.fs" />
+    <Compile Include="Branch5_HomeStudentView/ProfilePanel.fs" />
+    <Compile Include="Branch5_HomeStudentView/ExamsTableView.fs" />
+    <Compile Include="Branch5_HomeStudentView/StudentsTableView.fs" />
+    <Compile Include="Branch6_TeacherCrudModals/StudentModals.fs" />
+    <Compile Include="Branch7_MockSubmissionAndShell/MockSubmissionModal.fs" />
+    <Compile Include="Branch7_MockSubmissionAndShell/HomeView.fs" />
+    <Compile Include="Branch7_MockSubmissionAndShell/Tests.fs" />
+    <Compile Include="Branch7_MockSubmissionAndShell/Program.fs" />
   </ItemGroup>
 
   <ItemGroup>

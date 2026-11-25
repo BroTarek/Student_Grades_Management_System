@@ -79,14 +79,27 @@ module Tests =
         let sAdminHome = Result.defaultWith (fun e -> failwith e) loginTeacherRes
         assertEqual "Logged in user is Admin" (Some Admin) (sAdminHome.LoggedInUser |> Option.map (fun u -> u.Role))
 
-        // Add student
+        // Add student (also generates dummy exams)
         let addedRes = State.addStudent "Zaid Rami" "zaid@school.edu" 8 sAdminHome
         assertTrue "Admin can add student" (Result.isOk addedRes)
         let sAdded = Result.defaultWith (fun e -> failwith e) addedRes
         assertEqual "Student count increased" (sAdminHome.Students.Length + 1) sAdded.Students.Length
 
-        // Edit student
+        // Verify dummy exams generated for newly added student
         let zaid = sAdded.Students |> List.find (fun s -> s.Email = "zaid@school.edu")
+        assertTrue "New student has dummy exams" (not zaid.Exams.IsEmpty)
+        assertEqual "New student dummy exam count" 3 zaid.Exams.Length
+
+        // Verify highest and lowest average helper
+        let highestOpt, lowestOpt = Domain.highestAndLowestAverageStudents sAdded.Students
+        assertTrue "Highest average student found" (Option.isSome highestOpt)
+        assertTrue "Lowest average student found" (Option.isSome lowestOpt)
+        let _, highestAvg = highestOpt.Value
+        let lowestStudent, lowestAvg = lowestOpt.Value
+        assertTrue "Highest avg >= lowest avg" (highestAvg >= lowestAvg)
+        assertEqual "Lowest avg student is Ali (25.0)" "one@gmail.com" lowestStudent.Email
+
+        // Edit student
         let editedRes = State.updateStudent zaid.Id "Zaid Updated" "zaid.updated@school.edu" 9 sAdded
         assertTrue "Admin can edit student" (Result.isOk editedRes)
         let sEdited = Result.defaultWith (fun e -> failwith e) editedRes

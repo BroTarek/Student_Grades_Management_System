@@ -75,7 +75,7 @@ module State =
                                   Name = trimmedName
                                   Email = trimmedEmail
                                   Grade = g
-                                  Exams = [] } ]
+                                  Exams = Domain.generateDummyExams trimmedEmail } ]
 
                     Ok
                         { state with
@@ -153,7 +153,7 @@ module State =
                       Name = trimmedName
                       Email = trimmedEmail
                       Grade = grade
-                      Exams = [] }
+                      Exams = Domain.generateDummyExams trimmedEmail }
 
                 Ok
                     { state with

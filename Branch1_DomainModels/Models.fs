@@ -121,6 +121,45 @@ module Domain =
     let isValidScore (score: float) : bool =
         not (Double.IsNaN score) && not (Double.IsInfinity score) && score >= 0.0 && score <= 100.0
 
+    /// Generates a varied set of dummy exams for newly created students.
+    let generateDummyExams (seedText: string) : ExamRecord list =
+        let hash =
+            seedText.Trim().ToLowerInvariant()
+            |> Seq.fold (fun acc ch -> (acc * 31 + int ch) &&& 0x7FFFFFFF) 17
+
+        let score1 = float (45 + (hash % 51))
+        let score2 = float (35 + ((hash / 7) % 61))
+        let score3 = float (50 + ((hash / 13) % 48))
+
+        [ { QuizDate = "05/10/2026"
+            QuizTitle = "Quiz 1: Foundations"
+            Grade = score1
+            QuizStatus = score1 >= passingGradeThreshold }
+          { QuizDate = "19/10/2026"
+            QuizTitle = "Quiz 2: Applied Practice"
+            Grade = score2
+            QuizStatus = score2 >= passingGradeThreshold }
+          { QuizDate = "02/11/2026"
+            QuizTitle = "Midterm Evaluation"
+            Grade = score3
+            QuizStatus = score3 >= passingGradeThreshold } ]
+
+    /// Finds the students with the highest and lowest exam averages.
+    let highestAndLowestAverageStudents
+        (students: StudentRecord list)
+        : (StudentRecord * float) option * (StudentRecord * float) option =
+        let candidates =
+            let withExams = students |> List.filter (fun s -> not s.Exams.IsEmpty)
+            if not withExams.IsEmpty then withExams else students
+
+        match candidates with
+        | [] -> None, None
+        | xs ->
+            let withAverages = xs |> List.map (fun s -> s, calculateAverage s.Exams)
+            let highest = withAverages |> List.maxBy snd
+            let lowest = withAverages |> List.minBy snd
+            Some highest, Some lowest
+
     /// Seeded student records stored purely in memory.
     let seededStudents: StudentRecord list =
         [ { Id = Guid.Parse("11111111-1111-1111-1111-111111111111")
