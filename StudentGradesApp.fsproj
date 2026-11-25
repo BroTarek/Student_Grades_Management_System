@@ -11,6 +11,7 @@
     <Compile Include="State.fs" />
     <Compile Include="Views/Theme.fs" />
     <Compile Include="Views/RegistrationView.fs" />
+    <Compile Include="Views/LoginView.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
