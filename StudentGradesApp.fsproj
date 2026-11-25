@@ -12,6 +12,9 @@
     <Compile Include="Views/Theme.fs" />
     <Compile Include="Views/RegistrationView.fs" />
     <Compile Include="Views/LoginView.fs" />
+    <Compile Include="Views/ProfilePanel.fs" />
+    <Compile Include="Views/ExamsTableView.fs" />
+    <Compile Include="Views/StudentsTableView.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
